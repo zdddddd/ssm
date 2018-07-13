@@ -1,0 +1,68 @@
+1、创建javaweb项目
+2、添加web.xml文件
+3、添加jar包
+	aopalliance-1.0.jar
+	asm-3.3.1.jar
+	aspectjweaver.jar
+	c3p0-0.9.5.2.jar							c3p0的数据库连接池
+	cglib-2.2.2.jar
+	commons-fileupload-1.3.2.jar				文件上传
+	commons-io-2.5.jar							文件上传
+	commons-logging-1.2.jar						记录日志
+	hamcrest-core-1.3.jar						junit的依赖包
+	jackson-annotations-2.6.3.jar				json-object的序列化、反序列化
+	jackson-core-2.6.3.jar						json-object的序列化、反序列化
+	jackson-databind-2.6.3.jar					json-object的序列化、反序列化
+	javassist-3.17.1-GA.jar						用于动态代理
+	junit-4.12.jar								用于单元测试
+	log4j-1.2.17.jar							用于日志记录
+	log4j-api-2.0-rc1.jar						用于日志记录
+	log4j-core-2.0-rc1.jar						用于日志记录
+	mchange-commons-java-0.2.11.jar				c3p0的数据库连接池
+	mybatis-3.2.7.jar							mybatis的jar包
+	mybatis-spring-1.2.3.jar					spring和mybatis的整合包
+	mysql-connector-java-5.1.30.jar				mysql的驱动包
+	slf4j-api-1.7.5.jar							用于日志记录
+	slf4j-log4j12-1.7.5.jar						用于日志记录
+	spring-aop-4.1.6.RELEASE.jar				spring的aop
+	spring-beans-4.1.6.RELEASE.jar				spring的beans
+	spring-context-4.1.6.RELEASE.jar			spring的上下文
+	spring-core-4.1.6.RELEASE.jar				spring的核心
+	spring-expression-4.1.6.RELEASE.jar			spring的表达式
+	spring-jdbc-4.1.6.RELEASE.jar				spring对jdbc的封装
+	spring-tx-4.1.6.RELEASE.jar					spring的声明式事务处理
+	spring-web-4.1.6.RELEASE.jar				spring的web
+	spring-webmvc-4.1.6.RELEASE.jar				springMVC的jar包
+	taglibs-standard-compat-1.2.5.jar			JSTL表达式
+	taglibs-standard-impl-1.2.5.jar				JSTL表达式
+	taglibs-standard-jstlel-1.2.5.jar			JSTL表达式
+	taglibs-standard-spec-1.2.5.jar				JSTL表达式
+
+3、配置web.xml文件
+4、在src下添加配置文件：
+	applicationContext-dao.xml
+	applicationContext-service.xml
+	applicationContext-tx.xml
+	log4j.properties
+	mybatisConfig.xml
+	UserMapper.xml(用的时候再说)
+	
+5、启动项目，测试一下
+	a、创建数据库，添加数据库表
+	b、添加springmvc.xml文件
+	c、添加了index.jsp
+6、添加用户模块
+	com.bjsxt.pojo
+		User.java
+	com.bjsxt.mapper
+		UserMapper.java
+		UserMapper.xml
+	com.bjsxt.service
+		UserService.java
+	com.bjsxt.service.impl
+		UserServiceImpl.java
+	com.bjsxt.controller
+		UserController.java
+7、添加success.jsp
+	添加js/jquery.min.js
+	ajax中通过url传参RESTful，首先要获取参数${param.userId}获取请求参数中的userId的值

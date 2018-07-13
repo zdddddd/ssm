@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!-- 开启懒加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 设置为false让属性在需要的时候加载，不需要的时候不加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <typeAliases>
+        <package name="com.bjsxt.pojo"/>
+    </typeAliases>
+</configuration>

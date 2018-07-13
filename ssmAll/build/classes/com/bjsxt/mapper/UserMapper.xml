@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjsxt.mapper.UserMapper">
+
+	<insert id="insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="userId">
+		insert into tb_user(user_name, user_pwd) values(#{username}, #{password})
+	</insert>
+	
+	<update id="updateUser" parameterType="user">
+		update tb_user
+		<set>
+			<if test="username != null">
+				user_name = #{username},
+			</if>
+			<if test="password != null">
+				 user_pwd=#{password}
+			</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="_int">
+		delete from tb_user where user_id=#{value}
+	</delete>
+	
+	<sql id="user_fields">
+		user_id, user_name, user_pwd
+	</sql>
+	
+	<select id="selectUser" parameterType="_int" resultMap="userMap">
+		select <include refid="user_fields"/>
+		from tb_user where user_id=#{value}
+	</select>
+	
+	<select id="selectPageUsers" resultMap="userMap">
+		select <include refid="user_fields"/>
+		from tb_user limit #{min}, #{rows}
+	</select>
+	
+	<!-- 查询总页数 -->
+	<select id="selectPageCount" resultType="_int" parameterType="_int">
+		select ceil(count(user_id) / #{value}) from tb_user
+	</select>
+	
+	<resultMap type="user" id="userMap">
+		<id column="user_id" property="userId"/>
+		<result column="user_name" property="username"/>
+		<result column="user_pwd" property="password"/>
+	</resultMap>
+	
+</mapper>

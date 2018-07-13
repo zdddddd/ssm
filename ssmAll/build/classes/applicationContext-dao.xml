@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- spring加载src下的jdbc.properties文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- 1、创建一个数据源 -->
+	
+	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialPoolSize" value="${jdbc.c3p0.initialPoolSize}" />
+		<property name="minPoolSize" value="${jdbc.c3p0.minPoolSize}" />
+		<property name="maxPoolSize" value="${jdbc.c3p0.maxPoolSize}" />
+	</bean>
+
+	<!-- 2、配置mybatis的SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 指定数据源 -->
+		<property name="dataSource" ref="myDataSource" />
+		<!-- 指定mybatis的配置文件 -->
+		<property name="configLocation" value="classpath:mybatisConfig.xml" />
+	</bean>
+	
+	<!-- 扫描指定包中的mapper映射文件和mapper接口类，生成mapper接口类的实现类对象
+		将这些实现类的对象放到spring的容器中，并取名为mapper接口的首字母小写
+		
+		com.bjsxt.mapper.UserMapper.java    com/bjsxt/mapper/UserMapper.xml
+		UserMapper userMapper = session.getMapper(UserMapper.java);
+		UserMapper的实现类对象，放到spring容器中，并取名为UserMapper->userMapper
+	 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bjsxt.mapper"></property>
+	</bean>
+	
+</beans>
